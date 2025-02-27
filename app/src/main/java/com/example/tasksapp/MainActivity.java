@@ -70,11 +70,12 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
             NotificationChannel channel = new NotificationChannel(
                     "task_channel",
                     "Task Notifications",
-                    NotificationManager.IMPORTANCE_HIGH
+                    NotificationManager.IMPORTANCE_HIGH // اولويه
             );
-            channel.setDescription("Channel for task reminders");
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
+            if (notificationManager != null) {
+                notificationManager.createNotificationChannel(channel);
+            }
         }
     }
     private void loadTasks() {

@@ -148,19 +148,16 @@ public class AddNewTask extends BottomSheetDialogFragment {
             Log.e("Notification", "Intent is null!");
             return;
         }
-        intent.putExtra("task", task.getTask());
+        intent.putExtra("task", task.getTask()); // ده البيانات الى هتبعت للbroadcast
         intent.putExtra("description", task.getDescription());
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 getActivity(),
-                0,
+                0, //id notif
                 intent,
-                PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT
+                PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT //بيحدث intent بدل ما يعمل واحد جديد
         );
         AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-        if (alarmManager == null) {
-            Log.e("Notification", "AlarmManager is null!");
-            return;
-        }
+
         Calendar calendar = Calendar.getInstance();
         String[] timeParts = task.getTime().split(":");
         if (timeParts.length < 2) {
